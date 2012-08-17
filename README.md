@@ -46,7 +46,7 @@ There are two modules in this API: Fresh::Auth::Authentication and Fresh::Auth::
 
 This module authenticates you with Freshbooks, storing the authentication in an array called `session`.  This integrates seamlessly with Ruby on Rails' controller environment.  If you're using some framework other than Ruby on Rails, make sure to define session in your class before including the Authentication module.  This isn't recommended because your class will also need to define another object called `params` and implement a `redirect_to` method.  It gets complicated.  Better leave it to Rails to handle this for you.
 
-The only public function of this module is AuthenticateWithFreshbooks.  It takes one argument, redirect, which is the url that you would like Freshbooks to redirect the user to once user has logged into Freshbooks and is redirected to your site.
+The only public function of this module is AuthenticateWithFreshbooks.  It takes one argument, redirect, which is the url that you would like Freshbooks to redirect the user to once user has logged into Freshbooks and is redirected to your site.  This is also the page that your user will be redirected to when AuthenticateWithFreshbooks is called, if user has not already authenticated with Freshbooks.  So the resource located at `redirect` itself must call AuthenticateWithFreshbooks so that when user is redirected there, it will redirect user to Freshbooks' login page, which, after user logs in, will redirect user back to `redirect`.
 
 To use it, just add the following line of code to your controller:
 `
