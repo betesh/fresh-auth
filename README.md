@@ -92,7 +92,7 @@ Ok, you created the XML.  Now you want to send it.  Sounds pretty complicated, r
 
 `_response = PostToFreshbooksApi my_xml`
 
-Now, are you wondering what's in `_response`?  I'll tell you shortly, but before we discuss that, we have to know about the exception that PostToFreshbooksApi might raise.  It raises a detailed error message if the respons status is not 'ok'.  Makes sense, right?
+Now, are you wondering what's in `_response`?  I'll tell you shortly, but before we discuss that, we have to know about the exception that PostToFreshbooksApi might raise.  It raises a detailed error message if the response status is not 'ok'.  Makes sense, right?
 
 Now, you still want to know what's in `_response`?  Oh, nothing fancy.  Just a Nokogiri XML object, representing the root element of the xml response.  Could this get any easier?
 
