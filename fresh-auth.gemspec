@@ -17,5 +17,4 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'builder', '>= 3.0.0'
   gem.add_runtime_dependency 'rest-client', '>= 1.6.7'
   gem.add_runtime_dependency 'nokogiri', '>= 1.5.5'
-  gem.add_runtime_dependency 'actionpack', '>= 3.2.3'
 end
