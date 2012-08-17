@@ -21,22 +21,24 @@ You must define your freshbooks subdomain and your OAuth Secret in your applicat
 
 Your configuration file should look like this (you fill in the three empty strings):
 
-`module Fresh
-  module Auth
-    module Url
-      # The part of your login url between 'http://' and '.freshbooks.com'
-      Subdomain = ""
-    end
+`
+#module Fresh
+#  module Auth
+#    module Url
+#      # The part of your login url between 'http://' and '.freshbooks.com'
+#      Subdomain = ""
+#    end
 
-    # Under 'My Account' (on the top right when you're logged into Freshbooks)
-    #   -> 'Freshbooks API' -> 'OAuth Developer Access' -> 'OAuth Secret'
-    # You'll need to request this from Freshbooks initially.
-    OAuthSecret = ""
+#    # Under 'My Account' (on the top right when you're logged into Freshbooks)
+#    #   -> 'Freshbooks API' -> 'OAuth Developer Access' -> 'OAuth Secret'
+#    # You'll need to request this from Freshbooks initially.
+#    OAuthSecret = ""
 
-    # Any string of your choice.  Be creative or check out http://www.thebitmill.com/tools/password.html
-    NonceSalt = ""
-  end
-end`
+#    # Any string of your choice.  Be creative or check out http://www.thebitmill.com/tools/password.html
+#    NonceSalt = ""
+#  end
+#end
+`
 
 ### Public API:
 
@@ -67,26 +69,28 @@ First, in your controller:
 
 Then, in some method in that controller:
 
-`my_xml = GenerateXml :invoice, :update do |xml|
-  xml.client_id 20
-  xml.status 'sent'
-  xml.notes 'Pick up the car by 5'
-  xml.terms 'Cash only'
-  xml.lines {
-    xml.line {
-      xml.name 'catalytic converter'
-      xml.quantity 1
-      xml.unit_cost 450
-      xml.type 'Item'
-    }
-    xml.line {
-      xml.name 'labor'
-      xml.quantity 1
-      xml.unit_cost 60
-      xml.type 'Time'
-    }
-  }
-end`
+`
+#my_xml = GenerateXml :invoice, :update do |xml|
+#  xml.client_id 20
+#  xml.status 'sent'
+#  xml.notes 'Pick up the car by 5'
+#  xml.terms 'Cash only'
+#  xml.lines {
+#    xml.line {
+#      xml.name 'catalytic converter'
+#      xml.quantity 1
+#      xml.unit_cost 450
+#      xml.type 'Item'
+#    }
+#    xml.line {
+#      xml.name 'labor'
+#      xml.quantity 1
+#      xml.unit_cost 60
+#      xml.type 'Time'
+#    }
+#  }
+#end
+`
 
 Ok, you created the XML.  Now you want to send it.  Sounds pretty complicated, right?  No at all! Ready?  Let's go!
 
