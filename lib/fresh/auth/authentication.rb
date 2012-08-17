@@ -5,11 +5,11 @@ module Fresh
   module Auth
     module Authentication
 
-      def AuthenticateWithFreshbooks _redirect_url
-        @redirect_url = _redirect_url
+      def AuthenticateWithFreshbooks
+        @redirect_url = request.url.split("?")[0]
         if !session.has_key? Key::Session
           Request() and return if !params.has_key? Key::Verifier
-          Access() and redirect_to _redirect_url
+          Access() and redirect_to @redirect_url
         end
       end
 
