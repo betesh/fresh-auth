@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/fresh-auth/version', __FILE__)
+require File.expand_path('../lib/fresh/auth/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Isaac Betesh"]
@@ -14,5 +14,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Fresh::Auth::VERSION
   gem.license       = 'MIT'
-  gem.add_runtime_dependency 'rails', '>= 3.2.3'
+  gem.add_runtime_dependency 'builder', '>= 3.0.0'
+  gem.add_runtime_dependency 'rest-client', '>= 1.6.7'
+  gem.add_runtime_dependency 'nokogiri', '>= 1.5.5'
+  gem.add_runtime_dependency 'actionpack', '>= 3.2.3'
 end
