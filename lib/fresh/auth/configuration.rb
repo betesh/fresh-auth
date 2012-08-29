@@ -14,24 +14,24 @@ module Fresh
           @subdomain
         end
 
-        def base
-          "https://#{@subdomain}.freshbooks.com/"
-        end
-
         def request
-          self.base + "oauth/oauth_request.php"
+          base + "oauth/oauth_request.php"
         end
 
         def auth
-          self.base + "oauth/oauth_authorize.php"
+          base + "oauth/oauth_authorize.php"
         end
 
         def access
-          self.base + "oauth/oauth_access.php"
+          base + "oauth/oauth_access.php"
         end
 
         def api
-          self.base + "api/2.1/xml-in"
+          base + "api/2.1/xml-in"
+        end
+      private
+        def base
+          "https://#{@subdomain}.freshbooks.com/"
         end
       end
 
