@@ -1,3 +1,4 @@
+require 'fresh/auth/configuration'
 require 'fresh/auth/constants'
 require 'fresh/auth/parameters'
 require 'rest_client'
