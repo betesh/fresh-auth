@@ -16,7 +16,7 @@ module Fresh
       end
 
       def PostToFreshbooksApi xml
-        root = Nokogiri::XML(RestClient.post Url::Api, xml, HttpHeaders()).root
+        root = Nokogiri::XML(RestClient.post Fresh::Auth.configuration.url.api, xml, HttpHeaders()).root
         raise "Request to Freshbooks API failed:\n#{root}" if "ok" != root.attributes["status"].to_s
         root
       end
@@ -24,9 +24,9 @@ private
       def HttpHeaders
         _header = {
           :'OAuth realm' => "",
-          Key::AuthToken => session[Key::Session][Key::AuthToken]
+          Key::AUTH_TOKEN => session[Key::SESSION][Key::AUTH_TOKEN]
         }.merge Parameters.Common()
-        _header[Key::Signature] += session[Key::Session][Key::AuthSecret]
+        _header[Key::SIGNATURE] += session[Key::SESSION][Key::AUTH_SECRET]
         val = ""
         _header.collect{ |k, v| val += "#{k}=\"#{v}\","}
         { :Authorization => val.chomp(",") }

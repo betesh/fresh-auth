@@ -2,7 +2,7 @@
 
 This gem makes it really, REALLY easy to use the Freshbooks API.  It couldn't be easier.
 
-With only 3 functions you'll ever need to use, and only 3 configuration values (all required), it can't get any easier.
+With only 3 functions you'll ever need to use, and only 2 required configuration values, it can't get any easier.
 
 ## Installation
 
@@ -17,26 +17,25 @@ Or install it yourself as:
 
 ### Configuration:
 
-You must define your freshbooks subdomain and your OAuth Secret in your application code before gems are loaded.  For Ruby on Rails apps, a new file in config/fresh-auth.rb would be appropriate.  To load the configuration before loading the gem, add a line to config/boot.rb (anywhere in the file) to require the configuration file, i.e.: `require File.expand_path('../fresh-auth', __FILE__)`.  Ya, I know, it's a little hack-ish, but does the job.
+You must define your Freshbooks subdomain and your OAuth Secret in your application code before using Fresh::Auth.  For Ruby on Rails apps, a new file at config/initializers/fresh-auth.rb would be appropriate.
 
 Your configuration file should look like this (you fill in the three empty strings):
 
-    module Fresh
-      module Auth
-        module Url
-          # The part of your login url between 'http://' and '.freshbooks.com'
-          Subdomain = ""
-        end
+    Fresh::Auth.configure do |config|
 
-        # Under 'My Account' (on the top right when you're logged into Freshbooks)
-        #   -> 'Freshbooks API' -> 'OAuth Developer Access' -> 'OAuth Secret'
-        # You'll need to request this from Freshbooks initially.
-        OAuthSecret = ""
+      # The part of your login url between 'http://' and '.freshbooks.com'
+      config.url.subdomain = ""
 
-        # Any string of your choice.  Be creative or check out http://www.thebitmill.com/tools/password.html
-        NonceSalt = ""
-      end
+      # Under 'My Account' (on the top right when you're logged into Freshbooks)
+      #   -> 'Freshbooks API' -> 'OAuth Developer Access' -> 'OAuth Secret'
+      # You'll need to request this from Freshbooks initially.
+      config.oauth_secret = ""
+
+      # Optional.  Any string of your choice.  Be creative or check out http://www.thebitmill.com/tools/password.html
+      config.nonce_salt = ""
     end
+
+Fear not: If you try to use Fresh::Auth without configuring it first, an exception will be thrown that clearly describes the problem.
 
 ### Public API:
 
@@ -44,7 +43,7 @@ There are two modules in this API: Fresh::Auth::Authentication and Fresh::Auth::
 
 #### Fresh::Auth::Authentication
 
-This module authenticates you with Freshbooks, storing the authentication in an array called `session`.  This integrates seamlessly with Ruby on Rails' controller environment.  If you're using some framework other than Ruby on Rails, make sure to define session in your class before including the Authentication module.  This isn't recommended because your class will also need to define another object called `params` and implement a `redirect_to` method.  It gets complicated.  Better leave it to Rails to handle this for you.
+This module authenticates you with Freshbooks, storing the authentication in an array called `session`.  This integrates seamlessly with Ruby on Rails' controller environment.  If you're using some framework other than Ruby on Rails, make sure to define session in your class before including the Authentication module.  This isn't recommended because your class will also need to define other objects called `params` and `request` and implement a `redirect_to` method.  It gets complicated.  Better leave it to Rails to handle this for you.
 
 The only public function of this module is AuthenticateWithFreshbooks.
 
@@ -58,7 +57,7 @@ Then, the following line of code authenticates with Freshbooks from any method i
 AuthenticateWithFreshbooks()
 `
 
-Note that, after authenticating with freshbooks, the user will be redirected back to the same path using HTTP GET, so make sure the resource supports HTTP GET and that in the business logic executed on GET, AuthenticateWihFreshbooks() is called.
+Note that, after authenticating with Freshbooks, the user will be redirected back to the same path using HTTP GET, so make sure the resource supports HTTP GET and that in the business logic executed on GET, AuthenticateWihFreshbooks() is called.
 
 #### Fresh::Auth::Api
 
@@ -90,7 +89,7 @@ Then, in some method in that controller:
       }
     end
 
-Ok, you created the XML.  Now you want to send it.  Sounds pretty complicated, right?  No at all! Ready?  Let's go!
+Ok, you created the XML.  Now you want to send it.  Sounds pretty complicated, right?  Not at all! Ready?  Let's go!
 
 `_response = PostToFreshbooksApi my_xml`
 
