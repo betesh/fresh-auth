@@ -5,15 +5,22 @@ require 'fresh/auth/parameters'
 module Fresh
   module Auth
     module Authentication
-
       def AuthenticateWithFreshbooks
+        @redirect_url = "http://#{request.host_with_port}#{Fresh::Auth.configuration.url.callback_url}"
+        Request()
+=begin
         @redirect_url = request.url.split("?")[0]
         if !session.has_key? Key::SESSION
           Request() and return if !params.has_key? Key::VERIFIER
           Access() and redirect_to @redirect_url
         end
+=end
       end
-
+      
+      def AccessOfFreshbooks
+        Access()
+      end
+      
 private
       def ParseHttpResponse _response
         _hash = {}

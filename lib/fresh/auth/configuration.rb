@@ -4,7 +4,7 @@ module Fresh
   module Auth
     class Configuration
       attr_writer :oauth_secret
-      attr_accessor :url, :nonce_salt
+      attr_accessor :url, :nonce_salt,:callback_url
 
       class Url
         attr_writer :subdomain
