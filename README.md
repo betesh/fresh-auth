@@ -25,7 +25,8 @@ Your configuration file should look like this (you fill in the three empty strin
 
       # The part of your login url between 'http://' and '.freshbooks.com'
       config.url.subdomain = ""
-
+      #Callback URL must not contain host , port and portocol
+      config.url.callback_url = "" #e.g /:controller/:action
       # Under 'My Account' (on the top right when you're logged into Freshbooks)
       #   -> 'Freshbooks API' -> 'OAuth Developer Access' -> 'OAuth Secret'
       # You'll need to request this from Freshbooks initially.
@@ -56,8 +57,11 @@ Then, the following line of code authenticates with Freshbooks from any method i
 `
 AuthenticateWithFreshbooks()
 `
+###### Note: 
+After authenticating with Freshbooks, the user will be redirected back to the callback url he has specified in configuration. In callback function you must have to call `AccessOfFreshbooks()` because it would get access from freshbooks and provider tokens which would then be available in session. 
 
-Note that, after authenticating with Freshbooks, the user will be redirected back to the same path using HTTP GET, so make sure the resource supports HTTP GET and that in the business logic executed on GET, AuthenticateWihFreshbooks() is called.
+
+Example: https://github.com/sonianand11/freshbooks_oauth_example
 
 #### Fresh::Auth::Api
 
