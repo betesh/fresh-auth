@@ -4,13 +4,18 @@ module Fresh
   module Auth
     class Configuration
       attr_writer :oauth_secret
-      attr_accessor :url, :nonce_salt,:callback_url
+      attr_accessor :url, :nonce_salt
 
       class Url
         attr_writer :subdomain
+        attr_accessor :callback_url
 
+        def callback_url
+          raise "Freshbooks callback url must be without protocol, host and port. e.g /:controller/:action " if @callback_url.blank? or @callback_url.include?("http://")
+          @callback_url
+        end
         def subdomain
-          raise "Fresh::Auth.configuration.url.subdomain cannot be blank" if @subdomain.blank?
+          raise "Freshbooks subdomain cannot be blank" if @subdomain.blank?
           @subdomain
         end
 
