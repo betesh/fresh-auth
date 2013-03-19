@@ -57,7 +57,8 @@ Then, the following line of code authenticates with Freshbooks from any method i
 `
 AuthenticateWithFreshbooks()
 `
-Note that, after authenticating with Freshbooks, the user will be redirected back to the callback url he has specified in configuration. In callback function you must have to call AccessOfFreshbooks() because it would get access from freshbooks and provider tokens which would then be available in session
+###### Note: 
+After authenticating with Freshbooks, the user will be redirected back to the callback url he has specified in configuration. In callback function you must have to call `AccessOfFreshbooks()` because it would get access from freshbooks and provider tokens which would then be available in session
 
 #### Fresh::Auth::Api
 
